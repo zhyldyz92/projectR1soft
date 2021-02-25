@@ -55,7 +55,7 @@
 
 
   - name: Get key from server
-    command: "r1soft-setup --get-key   http://54.160.71.153.80:8080" 
+    command: "r1soft-setup --get-key   http://54.237.34.15.80:8080" 
 
 
 #   - name: Open port for 1167 on centos 7 
