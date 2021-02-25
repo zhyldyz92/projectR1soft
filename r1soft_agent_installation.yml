@@ -1,0 +1,82 @@
+- name: Install R1soft Agent
+  become: yes
+  become_method: sudo
+  user: centos
+  hosts: all
+  tasks:
+
+  - name: Install Prerequisites
+    yum:
+      name:
+      - epel-release
+      - vim
+      - wget
+      - unzip
+  - name: add r1soft repository
+    yum_repository:
+      name: r1soft
+      description: R1Soft Repository Server
+      baseurl: http://repo.r1soft.com/yum/stable/$basearch/
+      enabled: yes
+      gpgcheck: no
+  - selinux:
+      state: disabled
+  - name: install pip
+    yum:
+      name: python-pip
+      state: present
+
+
+  - name: install zeep (dependency for r1soft modules)
+    pip:
+      name: zeep
+
+
+
+  - name: Install r1soft agent
+    when: ansible_os_family == "RedHat"
+    yum: 
+      name: 
+#       - update
+      - serverbackup-enterprise-agent  
+      - kernel-devel
+      - kernel-headers
+    ignore_errors: true 
+
+
+
+
+  - name: Start r1soft agent 
+    when: ansible_distribution_major_version == "7"   
+    command: "/etc/init.d/cdp-agent start"     
+
+
+
+
+
+  - name: Get key from server
+    command: "r1soft-setup --get-key   http://54.160.71.153.80:8080" 
+
+
+#   - name: Open port for 1167 on centos 7 
+#     when: ansible_distribution_major_version == "7"
+#     firewalld:
+#       port: 1167/tcp
+#       permanent: true
+#       state: enabled
+#     ignore_errors: true
+
+
+#   - name: install for fix bugs
+#     yum:
+#       name: 
+#       - kernel-devel
+#       - kernel-headers
+#       - distro-sync  
+#     ignore_errors: true    
+
+  - name: Restart server
+    command: /sbin/shutdown -r +1
+    async: 0
+    poll: 0
+    ignore_errors: true

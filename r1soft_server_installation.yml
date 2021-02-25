@@ -1,0 +1,51 @@
+- name: Install R1soft Server
+  become: yes
+  become_method: sudo
+  user: centos
+  hosts: all
+  tasks:
+  - name: Install Prerequisites
+    yum:
+      name:
+      - epel-release
+      - vim
+      - wget
+      - unzip
+  - name: add r1soft repository
+    yum_repository:
+      name: r1soft
+      description: R1Soft Repository Server
+      baseurl: http://repo.r1soft.com/yum/stable/$basearch/
+      enabled: yes
+      gpgcheck: no
+  - selinux:
+      state: disabled
+
+  - name: install r1soft server and dependencies
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - serverbackup-enterprise
+      - r1soft-cdp-enterprise-server 
+      - epel-release
+
+  - name: Create user and password
+    command: "r1soft-setup  --user admin --pass redhat --http-port 8080"    
+    ignore_errors: true
+
+
+  - name: Restart r1soft
+    command: "/etc/init.d/cdp-server restart"
+
+  - name: install pip
+    yum:
+      name: python-pip
+      state: present
+
+  - name: install zeep (dependency for r1soft modules)
+    pip:
+      name: zeep
+
+  - meta: flush_handlers
+
