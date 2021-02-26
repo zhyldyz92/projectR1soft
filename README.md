@@ -14,6 +14,9 @@
 
 R1soft R1Soft: Fast, reliable & affordable server backup management.
 R1Soft Server Backup Manager (SBM) gives service providers a flexible, server-friendly solution that eliminates the pains of running traditional backups.
+R1soft utilizes Continusly Data Protection to work in harmony with our system at the block level. Trasforming the entire backup process into a in short time. R1soft like a traditional backups, it starts by taking a full snapshot of your data. 
+After the initial replica is a created, our server backup manager continusly monitors changes to your data and savees only those bits of information that have changes.
+
 
 http://wiki.r1soft.com/display/ServerBackup/Documentation
 
@@ -42,3 +45,24 @@ youripaddress
 
 Step 4 Run the playbook
 
+Because of we were working on Centos7, Centos 7 has some bugs, to fix the bugs follow next steps
+
+HOW TO FIX CENTOS 7 R1SOFT-AGENT
+- name: install pip
+ yum:
+   name: python-pip
+   state: present
+- name: install zeep (dependency for r1soft modules)
+ pip:
+   name: zeep
+ yum:
+   name:
+   - serverbackup-enterprise-agent 
+   - kernel-devel
+   - kernel-headers
+   - distro-sync
+- name: Restart server
+ command: /sbin/shutdown -r +1
+ async: 0
+ poll: 0
+ ignore_errors: true
