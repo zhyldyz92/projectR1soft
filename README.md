@@ -10,7 +10,8 @@ http://wiki.r1soft.com/display/ServerBackup/Documentation
 
 
 
-
+This playbook installs R1soft server and R1sost Agent
+please follow the steps
 
 Installing R1soft agent on CentOS7 
 This ansible playbook will install R1soft agent. Please follow the steps
