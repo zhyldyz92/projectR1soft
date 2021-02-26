@@ -45,13 +45,8 @@ youripaddress
 
 Installing Prerequsites
 
-- name: Install Prerequisites
-    yum:
-      name:
-      - epel-release
-      - vim
-      - wget
-      - unzip
+![backuptest](https://user-images.githubusercontent.com/78001953/109366097-29486e80-7858-11eb-9010-f789b146864e.png)
+
 
 Because of we were working on Centos7, Centos 7 has some bugs, to fix the bugs follow next steps
 
