@@ -44,8 +44,7 @@ youripaddress
 youripaddress
 
 Installing Prerequsites
-
-![backuptest](https://user-images.githubusercontent.com/78001953/109366097-29486e80-7858-11eb-9010-f789b146864e.png)
+![photo_2021-02-26_17-31-21](https://user-images.githubusercontent.com/78001953/109366227-79bfcc00-7858-11eb-8233-7897e906e5e9.jpg)
 
 
 Because of we were working on Centos7, Centos 7 has some bugs, to fix the bugs follow next steps
