@@ -20,12 +20,23 @@ After the initial replica is a created, our server backup manager continusly mon
 
 http://wiki.r1soft.com/display/ServerBackup/Documentation
 
+Automation
 
+Installation backup agent (r1soft) on different platforms. R1Soft uses client - server architecture. To take a backup of the system, agent needs to be installed on remote systems. So I created ansible playbook that installs agent on remote systems. The playbook can actually sort the OS type and install packages accordingly.
 
+It became reusable playbook. I documented it and we are using it to automate the installation of backup agent.
 
+Version 1 Overall the project supposed to have the following things in it.
 
+It needs to Pre-steps i) enable r1soft repo depending on OS type ii) add hosts to the inventory a) install r1soft agent on centos 6 b) run r1soft / enable r1soft c) open port 1167 using iptables d) enroll the machine into r1soft server
 
+It needs to a) install r1soft agent on centos 7 b) run r1soft / enable r1soft c) open port 1167 using firewalld d) enroll the machine into r1soft server
 
+It also a good use for fedora 26. So I had to create another playbook for that. a) install r1soft agent on Fedora 26 b) run r1soft / enable r1soft c) open port 1167 using firewalld d) enroll the machine into r1soft server
+
+Another playbook It needs to install r1soft agent on Debian family a) install r1soft agent on Debian. b) run r1soft / enable r1soft c) open port 1167 using ufw d) enroll the machine into r1soft server
+
+It needs to install r1soft agent on Debian family a) install r1soft agent on Ubuntu b) run r1soft / enable r1soft c) open port 1167 using ufw d) enroll the machine into r1soft server
 
 This playbook installs R1soft server and R1sost Agent
 please follow the steps
