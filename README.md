@@ -43,7 +43,15 @@ youripaddress
 [r1softagent]
 youripaddress
 
-Step 4 Run the playbook
+Installing Prerequsites
+
+- name: Install Prerequisites
+    yum:
+      name:
+      - epel-release
+      - vim
+      - wget
+      - unzip
 
 Because of we were working on Centos7, Centos 7 has some bugs, to fix the bugs follow next steps
 
